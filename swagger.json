@@ -1,0 +1,22 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Blogify API",
+    "version": "1.0.0",
+    "description": "Documentation de l'API Blogify"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Page d'accueil",
+        "responses": {
+          "200": {
+            "description": "Retourne un message de bienvenue"
+          }
+        }
+      }
+    }
+  }
+}
+
+  
