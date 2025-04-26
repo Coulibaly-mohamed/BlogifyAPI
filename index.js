@@ -23,6 +23,7 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use(cors())
 app.use('/users/register', userRoot)
+app.use('/users/:id', userRoot)
 
 
 // Serve static files from the "public" directory
