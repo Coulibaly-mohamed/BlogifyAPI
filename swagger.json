@@ -110,8 +110,96 @@
       }
     },
     "/posts": {
-      "post": {
-        "summary": "Create a new blog post",
+      "get": {
+        "summary": "Get all posts",
+        "parameters": [
+          {
+            "name": "tag",
+            "in": "query",
+            "description": "Filter posts by tag",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "author",
+            "in": "query",
+            "description": "Filter posts by author",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Filter posts by date",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of posts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Post"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/posts/{id}": {
+      "get": {
+        "summary": "Get a specific post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Post details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Post"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Post not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update an existing post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -123,11 +211,32 @@
           }
         },
         "responses": {
-          "201": {
-            "description": "Post created successfully"
+          "200": {
+            "description": "Post updated successfully"
           },
-          "400": {
-            "description": "Invalid input"
+          "404": {
+            "description": "Post not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a specific post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Post deleted successfully"
+          },
+          "404": {
+            "description": "Post not found"
           }
         }
       }
@@ -153,27 +262,61 @@
         },
         "required": ["username", "email", "password"]
       },
+      "Post": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "My First Blog Post"
+          },
+          "content": {
+            "type": "string",
+            "example": "This is the content of the blog post."
+          },
+          "author": {
+            "type": "string",
+            "example": "60c72b2f9b1d8a30c4f3b0a5"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "technology"
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2021-08-01T10:00:00Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2021-08-02T10:00:00Z"
+          }
+        }
+      },
       "PostInput": {
         "type": "object",
         "properties": {
           "title": {
             "type": "string",
-            "example": "How to Learn Node.js"
+            "example": "My First Blog Post"
           },
           "content": {
             "type": "string",
-            "example": "Start by learning the basics of JavaScript..."
+            "example": "This is the content of the blog post."
           },
           "author": {
             "type": "string",
-            "example": "60d0fe4f5311236168a109ca"
+            "example": "60c72b2f9b1d8a30c4f3b0a5" 
           },
           "tags": {
             "type": "array",
             "items": {
-              "type": "string"
-            },
-            "example": ["javascript", "node", "webdev"]
+              "type": "string",
+              "example": "technology"
+            }
           }
         },
         "required": ["title", "content", "author"]
@@ -181,4 +324,3 @@
     }
   }
 }
-
