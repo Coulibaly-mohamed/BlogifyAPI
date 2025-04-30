@@ -2,7 +2,7 @@ import express from 'express';
 
 const router = express.Router();
 
-// Exemple de route
+//Post /register
 router.post('/register', async (req, res) => {
   const { email, username, password } = req.body;
 

@@ -6,6 +6,8 @@ import fs from 'fs';
 const swaggerDocument = JSON.parse(fs.readFileSync('./swagger.json', 'utf-8'));
 import connectDB from './Data/bd.js';
 import userRoot from './Routes/userRoot.js';
+import postRoot from './Routes/postRoot.js';
+
 
 
 config()
@@ -24,6 +26,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 app.use('/users/register', userRoot)
 app.use('/users/:id', userRoot)
+app.use('post/post',postRoot)
 
 
 // Serve static files from the "public" directory

@@ -108,6 +108,29 @@
           }
         }
       }
+    },
+    "/posts": {
+      "post": {
+        "summary": "Create a new blog post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Post created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -129,6 +152,31 @@
           }
         },
         "required": ["username", "email", "password"]
+      },
+      "PostInput": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "How to Learn Node.js"
+          },
+          "content": {
+            "type": "string",
+            "example": "Start by learning the basics of JavaScript..."
+          },
+          "author": {
+            "type": "string",
+            "example": "60d0fe4f5311236168a109ca"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": ["javascript", "node", "webdev"]
+          }
+        },
+        "required": ["title", "content", "author"]
       }
     }
   }
