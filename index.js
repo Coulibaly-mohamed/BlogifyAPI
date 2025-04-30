@@ -27,6 +27,10 @@ app.use(cors())
 app.use('/users/register', userRoot)
 app.use('/users/:id', userRoot)
 app.use('post/post',postRoot)
+app.use('get/post',postRoot)
+app.use('get/:id',postRoot)
+app.use('put/:id',postRoot)
+app.use('delete/:id',postRoot)
 
 
 // Serve static files from the "public" directory
